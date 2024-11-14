@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react"
 import { Outlet } from "react-router-dom"
 
 interface AuthenticationProps{
@@ -7,7 +8,19 @@ interface AuthenticationProps{
 }
 
 export default function AuthenticationPage({requireAuth, redirect, redirectPath}: AuthenticationProps){
-  console.log("Authenticating...")
+  const auth0 = useAuth0()
+
+  if (auth0.isLoading)
+    return 'Loading...'
+
+  const shouldRedirect = redirect && ((requireAuth && !auth0.isAuthenticated) || (!requireAuth && auth0.isAuthenticated))
+
+  if (shouldRedirect){
+    window.location.href = redirectPath
+    return 'Redirecting...'
+  }
+
+
   return (
       <Outlet/>
   )
