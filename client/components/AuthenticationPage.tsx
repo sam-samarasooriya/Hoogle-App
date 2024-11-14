@@ -14,7 +14,7 @@ export default function AuthenticationPage({requireAuth, redirect, redirectPath}
     return 'Loading...'
 
   const shouldRedirect = redirect && ((requireAuth && !auth0.isAuthenticated) || (!requireAuth && auth0.isAuthenticated))
-
+  console.log(auth0)
   if (shouldRedirect){
     window.location.href = redirectPath
     return 'Redirecting...'
@@ -22,6 +22,6 @@ export default function AuthenticationPage({requireAuth, redirect, redirectPath}
 
 
   return (
-      <Outlet/>
+    <Outlet/>
   )
 }
