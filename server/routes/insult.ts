@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import * as db from '../../server/db/insults.ts';
 
-
 const router = Router();
+
 
 router.get('/', async (req, res) => {
   try {
@@ -14,6 +14,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+router.get('/user', async (req, res) => {  
+  const { insultee_id } = req.query;
+  if (!insultee_id) {
+    return res.status(400).json({ error: 'Insultee ID is required' });
+  }
+
+  try {
+    const insults = await db.getInsultsByUserId(Number(insultee_id));
+    res.json(insults);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch insults' });
+  }
+});
+
+
 router.get('/:id', async (req, res, next) => {
   try {
     const insult = await db.getInsultById(req.params.id);
@@ -23,17 +39,18 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+
 router.post('/', async (req, res, next) => {
   try {
     const { insult, insultee_id, insulter_id, likes, dislike } = req.body;
     const id = await db.addInsult({ insult, insultee_id, insulter_id, likes, dislike });
-    res
-      .setHeader('Location', `${req.baseUrl}/${id}`)
-      .sendStatus(201);
-      console.log(id)
+    
+    
+    res.status(201).json({ id });
+    console.log("Inserted ID:", id); 
   } catch (err) {
     next(err);
-    console.log("error")
+    console.log("Error adding insult:", err);
   }
 });
 
