@@ -10,6 +10,14 @@ export async function getInsultById(id: number | string): Promise<Insult | undef
 }
 
 export async function addInsult(data: InsultData): Promise<number> {
-  const [id] = await db('Insult').insert(data);
-  return id;
+  const [id] = await db('Insult').insert(data);  
+  return id;  
+}
+
+
+
+export async function getInsultsByUserId(insultee_id: number): Promise<Insult[]> {
+  return db('Insult')
+    .select('id', 'insult', 'insultee_id', 'insulter_id', 'created_at', 'likes', 'dislikes')
+    .where({ insultee_id });
 }
