@@ -1,5 +1,5 @@
 import db from './connection';
-import { User, UserData } from '../../models/user';
+import { User, UserData } from '../../models/user.ts';
 
 export async function getAllUsers(): Promise<User[]> {
   return db('User').select();
