@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import '../styles/UserPage.css';
 
 interface User {
   id: number
@@ -33,7 +34,7 @@ export default function UsersPage() {
 
   return (
     <div>
-      <button onClick={() => logout()}>Logout</button>
+      <button className="logout" onClick={() => logout()}>Logout</button>
       <h2>Users</h2>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
