@@ -7,16 +7,16 @@ export const seed = async function(knex) {
   await knex('User', 'Insult').del()
  
     await knex('User').insert([
-      { id: 1, user: 'Alice', profile_picture: 'alice.jpg', bio: 'Loves hiking and outdoor adventures.' },
-      { id: 2, user: 'Bob', profile_picture: 'bob.jpg', bio: 'Avid reader and coffee enthusiast.' },
-      { id: 3, user: 'Charlie', profile_picture: 'charlie.jpg', bio: 'Music producer by day, gamer by night.' },
-      { id: 4, user: 'Diana', profile_picture: 'diana.jpg', bio: 'Travel blogger with a passion for photography.' },
-      { id: 5, user: 'Eve', profile_picture: 'eve.jpg', bio: 'Foodie who loves to cook and share recipes.' },
-      { id: 6, user: 'Frank', profile_picture: 'frank.jpg', bio: 'Tech geek and startup enthusiast.' },
-      { id: 7, user: 'Grace', profile_picture: 'grace.jpg', bio: 'Yoga instructor and wellness advocate.' },
-      { id: 8, user: 'Henry', profile_picture: 'henry.jpg', bio: 'A nature lover who enjoys birdwatching.' },
-      { id: 9, user: 'Ivy', profile_picture: 'ivy.jpg', bio: 'Artist and aspiring novelist.' },
-      { id: 10, user: 'Jack', profile_picture: 'jack.jpg', bio: 'Fitness trainer and nutrition expert.' },
+      { id: 1, user: 'Alice', profile_picture: 'alice.png', bio: 'Loves hiking and outdoor adventures.' },
+      { id: 2, user: 'Bob', profile_picture: 'bob.png', bio: 'Avid reader and coffee enthusiast.' },
+      { id: 3, user: 'Charlie', profile_picture: 'charlie.png', bio: 'Music producer by day, gamer by night.' },
+      { id: 4, user: 'Diana', profile_picture: 'diana.png', bio: 'Travel blogger with a passion for photography.' },
+      { id: 5, user: 'Eve', profile_picture: 'eve.png', bio: 'Foodie who loves to cook and share recipes.' },
+      { id: 6, user: 'Frank', profile_picture: 'frank.png', bio: 'Tech geek and startup enthusiast.' },
+      { id: 7, user: 'Grace', profile_picture: 'grace.png', bio: 'Yoga instructor and wellness advocate.' },
+      { id: 8, user: 'Henry', profile_picture: 'henry.png', bio: 'A nature lover who enjoys birdwatching.' },
+      { id: 9, user: 'Ivy', profile_picture: 'ivy.png', bio: 'Artist and aspiring novelist.' },
+      { id: 10, user: 'Jack', profile_picture: 'jack.png', bio: 'Fitness trainer and nutrition expert.' },
     ]);
 
     await knex('Insult').insert([

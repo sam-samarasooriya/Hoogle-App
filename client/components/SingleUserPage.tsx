@@ -30,6 +30,7 @@ export default function SingleUserPage() {
         const response = await fetch(`/api/v1/users/${id}`);
         if (!response.ok) throw new Error("Failed to fetch user");
         const data = await response.json();
+        
         setUser(data);
         setError(null);
       } catch (err) {
@@ -79,6 +80,8 @@ export default function SingleUserPage() {
     }
   }
 
+  
+
   return (
     <div>
       <h2>User Profile</h2>
@@ -88,7 +91,7 @@ export default function SingleUserPage() {
       {user ? (
         <div>
           <img
-            src={user.profile_picture || '/default-profile-pic.png'}  // Default image if profile_picture is not available
+            src={user.profile_picture ? `/images/${user.profile_picture}` : '/default-profile-pic.png'}
             alt={`${user.user}'s profile`}
             width="100"
           />

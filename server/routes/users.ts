@@ -24,8 +24,8 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const { user, profile_picture, bio } = req.body;
-    const id = await db.addUser({ user, profile_picture, bio });
+    const { name, profile_picture, bio } = req.body; 
+    const id = await db.addUser({ name, profile_picture, bio });
     res
       .setHeader('Location', `${req.baseUrl}/${id}`)
       .sendStatus(201);
