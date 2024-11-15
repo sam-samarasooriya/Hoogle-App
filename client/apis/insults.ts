@@ -66,7 +66,9 @@ export function deleteInsult(id: number): Promise<void> {
     })
 }
 
-export function getInsultsByUserId(insultee_id: number): Promise<{ id: number, insult: string }[]> {
+export function getInsultsByUserId(insultee_id: number): Promise<{
+  insultee_id: number; id: number, insult: string 
+}[]> {
   return request
     .get(`${rootUrl}/insults`)
     .query({ insultee_id })  
