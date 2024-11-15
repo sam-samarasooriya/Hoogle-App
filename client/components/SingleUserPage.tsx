@@ -27,11 +27,14 @@ export default function SingleUserPage() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await fetch(`/api/v1/users/${id}`)
-        if (!response.ok) throw new Error('Failed to fetch user')
-        const data = await response.json()
-        setUser(data)
-        setError(null)
+
+        const response = await fetch(`/api/v1/users/${id}`);
+        if (!response.ok) throw new Error("Failed to fetch user");
+        const data = await response.json();
+        
+        setUser(data);
+        setError(null);
+
       } catch (err) {
         setError('Unable to load user')
         console.error('Error fetching user:', err)
@@ -86,6 +89,8 @@ export default function SingleUserPage() {
     }
   }
 
+  
+
   return (
     <div>
       <h2>User Profile</h2>
@@ -95,10 +100,9 @@ export default function SingleUserPage() {
       {user ? (
         <div>
           <img
-            src={
-              `/images/${user.profile_picture}` ||
-              'images/default-profile-pic.png'
-            }
+
+            src={user.profile_picture ? `/images/${user.profile_picture}` : '/default-profile-pic.png'}
+
             alt={`${user.user}'s profile`}
             width="100"
           />

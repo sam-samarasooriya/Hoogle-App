@@ -11,5 +11,6 @@ export interface User {
     name: string;
     profile_picture: string;
     bio: string;
+
   }
   

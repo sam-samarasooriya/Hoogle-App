@@ -45,14 +45,13 @@ export default function UsersPage() {
         {users.map((user) => (
           <li key={user.id}>
             <div>
-              <img
-                src={
-                  `/images/${user.profile_picture}` ||
-                  'images/default-profile-pic.png'
-                }
-                alt={`${user.user}'s profile`}
-                width="100"
-              />
+
+            <img 
+              src={user.profile_picture ? `/images/${user.profile_picture}` : '/default-profile-pic.png'} 
+              alt={`${user.user}'s profile`} 
+              width="50" 
+            />
+
               <h3>{user.user}</h3>
               <p>{user.bio}</p>
               <Link to={`/users/${user.id}`}>View Profile</Link>
