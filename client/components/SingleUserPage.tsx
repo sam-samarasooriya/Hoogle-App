@@ -37,7 +37,11 @@ export default function SingleUserPage() {
 
       {user ? (
         <div>
-          <img src={user.profile_picture} alt={`${user.user}'s profile`} width="100" />
+          <img
+            src={user.profile_picture || '/default-profile-pic.png'}  // Default image if profile_picture is not available
+            alt={`${user.user}'s profile`}
+            width="100"
+          />
           <h3>{user.user}</h3>
           <p>{user.bio}</p>
         </div>
