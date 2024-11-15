@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import '../styles/UserPage.css';
 
 interface User {
   id: number
@@ -33,7 +34,7 @@ export default function UsersPage() {
 
   return (
     <div>
-      <button onClick={() => logout()}>Logout</button>
+      <button className="logout" onClick={() => logout()}>Logout</button>
       <h2>Users</h2>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -42,7 +43,7 @@ export default function UsersPage() {
         {users.map((user) => (
           <li key={user.id}>
             <div>
-              <img src={user.profile_picture} alt={`${user.user}'s profile`} width="50" />
+              <img src={'../public'} alt={`${user.user}'s profile`} width="50" />
               <h3>{user.user}</h3>
               <p>{user.bio}</p>
               <Link to={`/users/${user.id}`}>View Profile</Link>
