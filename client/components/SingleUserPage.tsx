@@ -23,6 +23,7 @@ export default function SingleUserPage() {
   const [newInsult, setNewInsult] = useState("");
   const [error, setError] = useState<string | null>(null);
 
+  // Fetch user data
   useEffect(() => {
     async function fetchUser() {
       try {
@@ -39,11 +40,14 @@ export default function SingleUserPage() {
     fetchUser();
   }, [id]);
 
+  // Fetch insults and filter only those targeted at the user
   useEffect(() => {
     async function fetchInsults() {
       try {
         const insultsData = await getInsultsByUserId(Number(id));
-        setInsults(insultsData);
+        // eslint-disable-next-line no-console
+        const targetedInsults = insultsData.filter((insult) => insult.insultee_id === Number(id));
+        setInsults(targetedInsults);
       } catch (err) {
         setError("Unable to load insults");
         console.error("Error fetching insults:", err);
@@ -52,6 +56,7 @@ export default function SingleUserPage() {
     fetchInsults();
   }, [id]);
 
+  // Handle adding a new insult
   async function handleAddInsult() {
     if (!newInsult) return;
     try {
@@ -86,11 +91,15 @@ export default function SingleUserPage() {
           <h3>{user.user}</h3>
           <p>{user.bio}</p>
 
-          <h3>Insults</h3>
+          <h3>Insults Targeted at {user.user}</h3>
           <ul>
-            {insults.map((insult) => (
-              <li key={insult.id}>{insult.insult}</li>
-            ))}
+            {insults.length > 0 ? (
+              insults.map((insult) => (
+                <li key={insult.id}>{insult.insult}</li>
+              ))
+            ) : (
+              <p>No insults found for this user.</p>
+            )}
           </ul>
 
           <h3>Add a New Insult</h3>
