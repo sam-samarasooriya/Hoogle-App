@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getInsultsByUserId, addInsult } from '../apis/insults'
 
@@ -27,14 +27,12 @@ export default function SingleUserPage() {
   useEffect(() => {
     async function fetchUser() {
       try {
+        const response = await fetch(`/api/v1/users/${id}`)
+        if (!response.ok) throw new Error('Failed to fetch user')
+        const data = await response.json()
 
-        const response = await fetch(`/api/v1/users/${id}`);
-        if (!response.ok) throw new Error("Failed to fetch user");
-        const data = await response.json();
-        
-        setUser(data);
-        setError(null);
-
+        setUser(data)
+        setError(null)
       } catch (err) {
         setError('Unable to load user')
         console.error('Error fetching user:', err)
@@ -89,8 +87,6 @@ export default function SingleUserPage() {
     }
   }
 
-  
-
   return (
     <div>
       <h2>User Profile</h2>
@@ -100,9 +96,11 @@ export default function SingleUserPage() {
       {user ? (
         <div>
           <img
-
-            src={user.profile_picture ? `/images/${user.profile_picture}` : '/default-profile-pic.png'}
-
+            src={
+              user.profile_picture
+                ? `/images/${user.profile_picture}`
+                : '/default-profile-pic.png'
+            }
             alt={`${user.user}'s profile`}
             width="100"
           />
@@ -129,6 +127,11 @@ export default function SingleUserPage() {
       ) : (
         <p>Loading...</p>
       )}
+
+      {/* Home button */}
+      <Link to="/" style={{ display: 'block', marginTop: '20px' }}>
+        <button>Home</button>
+      </Link>
     </div>
   )
 }
